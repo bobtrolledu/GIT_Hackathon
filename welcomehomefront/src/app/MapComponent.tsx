@@ -26,6 +26,7 @@ export default function MapComponent({areaName}: MapComponentProps) {
     id: "toronto-fill-layer",
     type: "fill",
       filter: ['==', 'AREA_NAME', areaName],
+      slot: "bottom",
     paint: {
       "fill-color": "#bf195a",
       "fill-opacity": 0.6,
