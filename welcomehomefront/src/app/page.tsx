@@ -23,7 +23,7 @@ export default function Home() {
         }, 500);
 
         try {
-            setHighlightedArea(encodeURIComponent(searchQuery));
+            setHighlightedArea(searchQuery);
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
