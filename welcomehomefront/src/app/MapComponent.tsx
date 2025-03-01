@@ -3,7 +3,11 @@ import * as React from "react";
 import Map, { Source, Layer } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export default function MapComponent() {
+interface MapComponentProps {
+    areaName: string;
+}
+
+export default function MapComponent({areaName}: MapComponentProps) {
   const [torontoData, setTorontoData] = React.useState(null);
 
   React.useEffect(() => {
@@ -21,7 +25,7 @@ export default function MapComponent() {
   const torontoFillLayer = {
     id: "toronto-fill-layer",
     type: "fill",
-      filter: ['==', 'AREA_NAME', 'Leaside-Bennington'],
+      filter: ['==', 'AREA_NAME', areaName],
     paint: {
       "fill-color": "#bf195a",
       "fill-opacity": 0.6,

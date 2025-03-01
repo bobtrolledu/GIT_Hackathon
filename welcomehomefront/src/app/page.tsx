@@ -9,6 +9,8 @@ export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
     const [coordinates, setCoordinates] = useState<{ lat: string, lon: string } | null>(null);
     const [loading, setLoading] = useState(false); // Controls the "Searching..." message
+    const [highlightedArea, setHighlightedArea] = useState("");
+
 
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
@@ -18,18 +20,10 @@ export default function Home() {
 
         setTimeout(() => {
             setLoading(false); // Remove "Searching..." after 3 seconds
-        }, 3000);
+        }, 500);
 
         try {
-            const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
-            const data = await response.json();
-
-            if (response.ok) {
-                setCoordinates({ lat: data.latitude, lon: data.longitude });
-                console.log(`Coordinates: ${data.latitude}, ${data.longitude}`);
-            } else {
-                console.error("Search error:", data.error);
-            }
+            setHighlightedArea(encodeURIComponent(searchQuery));
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
@@ -91,7 +85,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="w-screen h-screen bg-green-700 absolute inset-x-0 z-0">
-                <MapComponent />
+                <MapComponent areaName={highlightedArea} />
             </div>
         </div>
     );
