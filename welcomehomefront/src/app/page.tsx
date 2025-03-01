@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ArrowRightIcon, SearchIcon, Loader2 } from "lucide-react";
 import MapComponent from "@/app/MapComponent";
+import Axios from "axios";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
