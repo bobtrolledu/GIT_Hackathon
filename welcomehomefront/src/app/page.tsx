@@ -7,6 +7,8 @@ import MapComponent from "@/app/MapComponent";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SpotlightCard from "@/app/LocationCard";
+import AnimatedList from "@/app/AnimatedList";
+import UnClickableAnimatedList from "@/app/UnClickableAnimatedList";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -86,12 +88,62 @@ export default function Home() {
         }
     };
 
+    const items = [<a
+        href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
+        target="_blank" rel="noopener noreferrer" className=" hover:underline">🇨🇦
+        Government of Canada - New Immigrants</a>,
+        <a href="https://settlement.org" target="_blank" rel="noopener noreferrer"
+           className=" hover:underline w-full">🏠 Settlement.org - Housing, Jobs, and
+            Services</a>,
+        <a href="https://www.jobbank.gc.ca/findajob/resources/newcomers" target="_blank"
+           rel="noopener noreferrer" className=" hover:underline w-full">💼 Job Bank for
+            Newcomers</a>,
+        <a href="https://www.canada.ca/en/public-health/services/health-care-system.html"
+           target="_blank" rel="noopener noreferrer" className=" hover:underline w-full">🏥
+            Healthcare System in Canada</a>,
+        <a href="https://www.legalaid.on.ca/en/getting-legal-help/immigration-and-refugee-law/"
+           target="_blank" rel="noopener noreferrer" className=" hover:underline w-full">⚖️
+            Legal Aid for Immigrants & Refugees</a>,
+        <a href="https://www.cic.gc.ca/english/newcomers/after-immigration.asp" target="_blank"
+           rel="noopener noreferrer" className=" hover:underline w-full">📜 Things to Do
+            After Immigration</a>,
+        <a
+            href="https://www.canada.ca/en/financial-consumer-agency/services/newcomers-managing-money.html"
+            target="_blank" rel="noopener noreferrer" className=" hover:underline w-full">💰
+            Managing Money & Banking in Canada</a>,
+        <a href="https://www.ontario.ca/page/education-newcomers" target="_blank"
+           rel="noopener noreferrer" className=" hover:underline w-full">🎓 Education for
+            Newcomers</a>,
+        <a href="https://www.canada.ca/en/employment-social-development/services/sin/apply.html"
+           target="_blank" rel="noopener noreferrer" className=" hover:underline w-full">🔢
+            Apply for a Social Insurance Number (SIN)</a>
+    ]
+
+    const landmarksList = [
+        <p>📍 <strong>CN Tower:</strong> One of the tallest towers in the world, offering stunning
+                                views.</p>,
+        <p>🏛 <strong>Royal Ontario Museum:</strong> A mix of history, culture, and stunning
+                                architecture.</p>,
+        <p>🌲 <strong>High Park:</strong> A beautiful park with walking trails, a zoo, and cherry
+                                blossoms in spring.</p>,
+        <p>🛍 <strong>Kensington Market:</strong> A vibrant and diverse neighborhood known for its
+                                shops and food.</p>,
+        <p>🎭 <strong>Distillery District:</strong> Historic area filled with art galleries, cafes,
+                                and theaters.</p>,
+        <p>🎡 <strong>Canada's Wonderland:</strong> A thrilling amusement park featuring roller
+                                coasters,
+                                water rides, and entertainment.</p>,
+        <p>🎨 <strong>Art Gallery of Ontario:</strong> A world-class gallery showcasing Canadian and
+                                international art.</p>
+    ]
+
     return (
         <div className="flex dark">
             {loading && (
-                <div className="text-foreground text-sm fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+                <div
+                    className="text-foreground text-sm fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
                     <div className="bg-muted p-6 rounded-lg shadow-lg flex items-center space-x-3">
-                        <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
+                    <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
                     </div>
                 </div>
@@ -130,85 +182,54 @@ export default function Home() {
                   </ScrollArea>
                     <TabsContent value="tab-1">
                         <p className="text-center mb-4">Helpful resources for newcomers to Canada.</p>
-                        <ul className="space-y-2">
-                            <li><a
-                                href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
-                                target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">🇨🇦
-                                Government of Canada - New Immigrants</a></li>
-                            <li><a href="https://settlement.org" target="_blank" rel="noopener noreferrer"
-                                   className="text-blue-600 hover:underline">🏠 Settlement.org - Housing, Jobs, and
-                                Services</a></li>
-                            <li><a href="https://www.jobbank.gc.ca/findajob/resources/newcomers" target="_blank"
-                                   rel="noopener noreferrer" className="text-blue-600 hover:underline">💼 Job Bank for
-                                Newcomers</a></li>
-                            <li><a href="https://www.canada.ca/en/public-health/services/health-care-system.html"
-                                   target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">🏥
-                                Healthcare System in Canada</a></li>
-                            <li><a href="https://www.legalaid.on.ca/en/getting-legal-help/immigration-and-refugee-law/"
-                                   target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">⚖️
-                                Legal Aid for Immigrants & Refugees</a></li>
-                            <li><a href="https://www.cic.gc.ca/english/newcomers/after-immigration.asp" target="_blank"
-                                   rel="noopener noreferrer" className="text-blue-600 hover:underline">📜 Things to Do
-                                After Immigration</a></li>
-                            <li><a href="https://www.ontario.ca/page/education-newcomers" target="_blank"
-                                   rel="noopener noreferrer" className="text-blue-600 hover:underline">🎓 Education for
-                                Newcomers</a></li>
-                            <li><a
-                                href="https://www.canada.ca/en/financial-consumer-agency/services/newcomers-managing-money.html"
-                                target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">💰
-                                Managing Money & Banking in Canada</a></li>
-                            <li><a href="https://www.canada.ca/en/employment-social-development/services/sin/apply.html"
-                                   target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">🔢
-                                Apply for a Social Insurance Number (SIN)</a></li>
-                        </ul>
+                        <AnimatedList
+                          items={items}
+                          showGradients={false}
+                          enableArrowNavigation={false}
+                          displayScrollbar={false}
+                        />
                     </TabsContent>
                     <TabsContent value="tab-2">
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea1}</span>
-                            <p>
-                                {desc_1}
-                            </p>
-                        </SpotlightCard>
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea2}</span>
-                            <p>
-                                {desc_2}
-                            </p>
-                        </SpotlightCard>
+                        {highlightedArea1==="" ? (
+                            <SpotlightCard className="custom-spotlight-card m-5 z-30 h-200" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                <span className="font-bold">OOPS! No data yet.</span>
+                                <p>
+                                    Tell us more about yourself to get started!
+                                </p>
+                            </SpotlightCard>
+                        ) : (
+                            <>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea1}</span>
+                                    <p>
+                                        {desc_1}
+                                    </p>
+                                </SpotlightCard>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea2}</span>
+                                    <p>
+                                        {desc_2}
+                                    </p>
+                                </SpotlightCard>
 
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea3}</span>
-                            <p>
-                                {desc_3}
-                            </p>
-                        </SpotlightCard>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea3}</span>
+                                    <p>
+                                        {desc_3}
+                                    </p>
+                                </SpotlightCard>
+                            </>
+                        )}
+
                     </TabsContent>
                     <TabsContent value="tab-3">
                         <p className="text-center mb-4">Explore famous landmarks in Toronto.</p>
-                        <ul className="space-y-2">
-                            <li>📍 <strong>CN Tower:</strong> One of the tallest towers in the world, offering stunning
-                                views.
-                            </li>
-                            <li>🏛 <strong>Royal Ontario Museum:</strong> A mix of history, culture, and stunning
-                                architecture.
-                            </li>
-                            <li>🌲 <strong>High Park:</strong> A beautiful park with walking trails, a zoo, and cherry
-                                blossoms in spring.
-                            </li>
-                            <li>🛍 <strong>Kensington Market:</strong> A vibrant and diverse neighborhood known for its
-                                shops and food.
-                            </li>
-                            <li>🎭 <strong>Distillery District:</strong> Historic area filled with art galleries, cafes,
-                                and theaters.
-                            </li>
-                            <li>🎡 <strong>Canada's Wonderland:</strong> A thrilling amusement park featuring roller
-                                coasters,
-                                water rides, and entertainment.
-                            </li>
-                            <li>🎨 <strong>Art Gallery of Ontario:</strong> A world-class gallery showcasing Canadian and
-                                international art.
-                            </li>
-                        </ul>
+                        <UnClickableAnimatedList
+                          items={landmarksList}
+                          showGradients={false}
+                          enableArrowNavigation={false}
+                          displayScrollbar={false}
+                        />
                     </TabsContent>
                 </Tabs>
             </div>
