@@ -12,9 +12,10 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 
 # register the router
-router.register(r'visibleMinorityData',views.visibleMinorityView, 'visibleMinorityData')
+router.register(r'visibleMinorityData', views.visibleMinorityView, 'visibleMinorityData')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('api/computeNeighbourhood/', views.computeNeighbourhood),
 ]

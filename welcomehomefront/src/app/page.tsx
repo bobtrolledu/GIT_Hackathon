@@ -4,19 +4,34 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ArrowRightIcon, SearchIcon, Loader2 } from "lucide-react";
 import MapComponent from "@/app/MapComponent";
-import Axios from "axios";
 
 export default function Home() {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     const [searchQuery, setSearchQuery] = useState("");
     const [coordinates, setCoordinates] = useState<{ lat: string, lon: string } | null>(null);
     const [loading, setLoading] = useState(false); // Controls the "Searching..." message
     const [highlightedArea, setHighlightedArea] = useState("");
 
-
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
 
         console.log("Searching for:", searchQuery);
+        var csrftoken = getCookie('csrftoken');
+        console.log("CSRF Token:", csrftoken);
         setLoading(true); // Show "Searching..." for exactly 3 seconds
 
         setTimeout(() => {
@@ -24,7 +39,24 @@ export default function Home() {
         }, 500);
 
         try {
-            setHighlightedArea(searchQuery);
+            const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+                credentials: 'include',
+                method: "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ query: searchQuery })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json(); // Assign return value to a variable
+            console.log("Search results:", data);
+            setHighlightedArea(data);
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
