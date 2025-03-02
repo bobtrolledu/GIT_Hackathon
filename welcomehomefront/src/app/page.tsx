@@ -19,10 +19,10 @@ export default function Home() {
         if (searchQuery.trim() === "") return;
 
         console.log("Searching for what you need! Please hold :) :", searchQuery);
-       setLoading(true); // Show "Searching..." for exactly 3 seconds
+        setLoading(true);
 
         try {
-            const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+            const response_neighbourhood = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
                 credentials: 'include',
                 method: "POST",
                 headers: {
@@ -32,16 +32,37 @@ export default function Home() {
                 body: JSON.stringify({ query: searchQuery })
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            if (!response_neighbourhood.ok) {
+                throw new Error(`HTTP error! Status: ${response_neighbourhood.status}`);
             }
 
-            const data = await response.json(); // Assign return value to a variable
+            const data = await response_neighbourhood.json(); // Assign return value to a variable
             const list_data = data.split(", ")
 
             const data1 = list_data[0]
             const data2 = list_data[1]
             const data3 = list_data[2]
+
+            const response_description = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+                credentials: 'include',
+                method: "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: searchQuery, neighbourhood: data})
+            });
+
+            const data_description = await response_description.json();
+            const list_data_description = data_description.split("| ")
+
+            const description1 = list_data_description[0]
+            const description2 = list_data_description[1]
+            const description3 = list_data_description[2]
+
+            if (!response_neighbourhood.ok) {
+                throw new Error(`HTTP error! Status: ${response_neighbourhood.status}`);
+            }
 
             console.log("Search results:", data);
 
