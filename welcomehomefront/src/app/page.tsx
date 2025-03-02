@@ -14,6 +14,9 @@ export default function Home() {
     const [highlightedArea1, setHighlightedArea1] = useState("");
     const [highlightedArea2, setHighlightedArea2] = useState("");
     const [highlightedArea3, setHighlightedArea3] = useState("");
+    const [desc_1, setDesc_1] = useState("");
+    const [desc_2, setDesc_2] = useState("");
+    const [desc_3, setDesc_3] = useState("");
 
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
@@ -43,7 +46,7 @@ export default function Home() {
             const data2 = list_data[1]
             const data3 = list_data[2]
 
-            const response_description = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+            const response_description = await fetch("http://localhost:8000/api/computeDescription/", {
                 credentials: 'include',
                 method: "POST",
                 headers: {
@@ -54,7 +57,7 @@ export default function Home() {
             });
 
             const data_description = await response_description.json();
-            const list_data_description = data_description.split("| ")
+            const list_data_description = data_description.split("^ ")
 
             const description1 = list_data_description[0]
             const description2 = list_data_description[1]
@@ -65,10 +68,14 @@ export default function Home() {
             }
 
             console.log("Search results:", data);
+            console.log("Descriptions: ", data_description);
 
             setHighlightedArea1(data1);
             setHighlightedArea2(data2);
             setHighlightedArea3(data3);
+            setDesc_1(description1);
+            setDesc_2(description2);
+            setDesc_3(description3);
 
             setLoading(false);
 
@@ -157,22 +164,22 @@ export default function Home() {
                     </TabsContent>
                     <TabsContent value="tab-2">
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea1}Test</span>
+                            <span className="font-bold">{highlightedArea1}</span>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                                {desc_1}
                             </p>
                         </SpotlightCard>
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea2}Test</span>
+                            <span className="font-bold">{highlightedArea2}</span>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                                {desc_2}
                             </p>
                         </SpotlightCard>
 
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea3}Test</span>
+                            <span className="font-bold">{highlightedArea3}</span>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                                {desc_3}
                             </p>
                         </SpotlightCard>
                     </TabsContent>
