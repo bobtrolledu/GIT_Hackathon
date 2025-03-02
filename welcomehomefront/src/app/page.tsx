@@ -139,12 +139,14 @@ export default function Home() {
                         </ul>
                     </>
                 )}
+                
             </aside>
 
             {/* Background Map */}
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
                 <MapComponent areaName={highlightedArea}/>
             </div>
+            {/* Search Bar */}
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
                 <div className="absolute bottom-10 right-10 mt-2 w-96 bg-white h-auto p-5 rounded-lg drop-shadow-2xl pointer-events-auto flex flex-col items-center">
                     {/* Welcome Message */}
