@@ -45,16 +45,18 @@ export default function Home() {
                 <div className="mt-2 w-96 bg-white h-80 p-5 rounded-lg drop-shadow-2xl pointer-events-auto flex flex-col items-center">
                     {/* Welcome Message */}
                     <h1 className="font-sans text-2xl text-center mb-3">Hello and Welcome Home!</h1>
-                    <p className="text-black-600 text-center mb-4">
-                        Please search any inquiry you may have!
-                    </p>
-
                     {/* Canadian Flag Image */}
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
                         alt="Canadian Flag"
                         className="w-16 h-12 mb-4"
                     />
+
+                    <p className="text-black-600 text-center mb-4">
+                        Tell us about yourself and we'll help you find the perfect place to call home.
+                    </p>
+
+
 
                     <div className="relative w-full">
                         <Input
