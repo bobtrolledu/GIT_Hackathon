@@ -52,9 +52,11 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
           } catch (error) {
             console.error("Error fetching neighbourhood image:", error);
           }
-        } else {
+        }
+        else if (hoveredFeature) {
           setNeighbourhoodImg(imageCache[hoveredFeature.properties.AREA_NAME]);
         }
+
       };
 
       fetchNeighbourhoodImg();
