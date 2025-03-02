@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ArrowRightIcon, SearchIcon, Loader2, ChevronRight, ChevronLeft } from "lucide-react"; // Added arrows
 import MapComponent from "@/app/MapComponent";
+import NewSearchButton from "@/app/NewSearchButton";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -19,7 +20,6 @@ export default function Home() {
         setLoading(true); // Show "Searching..." for exactly 3 seconds
 
         try {
-
             const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
                 credentials: 'include',
                 method: "POST",
@@ -50,8 +50,7 @@ export default function Home() {
     return (
         <div className="flex">
             {loading && (
-                <div
-                    className="fixed inset-0 flex items-center justify-center z-50 bg-white/20 shadow-lg ring-1 ring-black/5 fade-in-20">
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-white/20 shadow-lg ring-1 ring-black/5 fade-in-20">
                     <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
                         <Loader2 className="animate-spin h-6 w-6 text-blue-600"/>
                         <p className="text-lg font-semibold">Searching...</p>
