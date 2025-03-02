@@ -2,6 +2,8 @@
 import * as React from "react";
 import Map, { Source, Layer, LayerProps, Popup} from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useTheme } from "next-themes"
+import {useEffect} from "react";
 
 interface MapComponentProps {
   areaName1: string;
@@ -17,6 +19,12 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
   const [hoverCoordinates, setHoverCoordinates] = React.useState<{ lng: number; lat: number } | null>(null);
   const [neighbourhoodImg, setNeighbourhoodImg] = React.useState<string | null>(null);
   const [imageCache, setImageCache] = React.useState<Record<string, string>>({});
+    const theme = useTheme();
+    const [layersLoaded, setLayersLoaded] = React.useState(false);
+
+    useEffect(() => {
+        setLayersLoaded(false);
+    }, [theme]);
 
   React.useEffect(() => {
     fetch("/torontoNeighbourhood-brafx6.geojson")
@@ -145,6 +153,11 @@ const LandmarkHoverLayer: LayerProps = {
     ? ["==", "AREA_NAME", hoveredFeature.properties.AREA_NAME]
     : ["==", "AREA_NAME", ""];
 
+        const onMapLoad = (e: any) => {
+            // Once the map has loaded, set the layers
+            setLayersLoaded(true);
+        };
+
   return (
     <div className="w-screen h-screen">
       <div className="absolute w-screen h-screen right-0">
@@ -157,14 +170,15 @@ const LandmarkHoverLayer: LayerProps = {
             pitch: 45,
           }}
           style={{ width: "100%", height: "100%" }}
-                        mapStyle="mapbox://styles/ezhayne/cm7rosvj3002m01sv4y1mdjzp"
+                        mapStyle={theme.theme === 'dark' ? 'mapbox://styles/ezhayne/cm7rosvj3002m01sv4y1mdjzp' : 'mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h'}
           maxZoom={20}
           minZoom={10.9}
           interactiveLayerIds={["toronto-fill-layer", "Landmark-fill-Layer"]}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+                        onLoad={onMapLoad}
         >
-          {torontoData && (
+          {torontoData && layersLoaded &&(
             <>
               <Source id="toronto-data" type="geojson" data={torontoData}>
                 <Layer {...torontoFillLayer} />

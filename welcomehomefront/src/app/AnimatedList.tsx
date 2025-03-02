@@ -63,8 +63,7 @@ const AnimatedList: React.FC<AnimatedListProps> = ({
   initialSelectedIndex = -1,
 }) => {
   const listRef = useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] =
-    useState<number>(initialSelectedIndex);
+  const [selectedIndex, setSelectedIndex] = useState<number>(initialSelectedIndex);
   const [keyboardNav, setKeyboardNav] = useState<boolean>(false);
   const [topGradientOpacity, setTopGradientOpacity] = useState<number>(0);
   const [bottomGradientOpacity, setBottomGradientOpacity] = useState<number>(1);
