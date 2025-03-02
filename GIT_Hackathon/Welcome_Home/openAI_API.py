@@ -1,6 +1,6 @@
 from openai import OpenAI
 from django.db import connection
-from .models import nativeLanguage, ageDensity, visibleMinority, civics_equity
+from .models import nativeLanguage, ageDensity, visibleMinority, civics_equity, environment
 import os
 from dotenv import load_dotenv
 
@@ -34,6 +34,7 @@ def compute_neighbourhoods(user_prompt):
     dataAge = ageDensity.objects.all().values()
     dataMinority = visibleMinority.objects.all().values()
     civics = civics_equity.objects.all().values()
+    enviroment = environment.objects.all().values()
 
     # Format data for display
     #table_string_census = format_table_data(census_data)
@@ -41,6 +42,7 @@ def compute_neighbourhoods(user_prompt):
     table_string_age = format_table_data(dataAge)
     table_string_minority = format_table_data(dataMinority)
     table_string_civics = format_table_data(civics)
+    table_string_enviroment = format_table_data(enviroment)
 
     # Generate response using ChatGPT
     completion = client.chat.completions.create(
@@ -50,6 +52,9 @@ def compute_neighbourhoods(user_prompt):
             {"role": "user", "content": f"""
 Here are some tables of information about the population in Toronto:
 
+enviroment data:
+{table_string_enviroment}
+---
 Civics and equity data:
 {table_string_civics}
 ---

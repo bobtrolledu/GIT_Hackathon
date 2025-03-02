@@ -86,3 +86,16 @@ class economics(models.Model):
 
     def __str__(self):
         return self.Neighbourhood
+
+class environment(models.Model):
+    Neighbourhood = models.CharField(max_length=200, unique=True)
+    NeighbourhoodId = models.IntegerField()
+    Green_rebate_programs = models.IntegerField()
+    Green_spaces = models.IntegerField()
+    pollutant_carcinogenic_score = models.IntegerField()
+    pollutant_noncarcinogenic_score = models.IntegerField()
+    pollutant_release = models.IntegerField()
+    tree_cover = models.IntegerField()
+
+    def __str__(self):
+        return self.Neighbourhood
