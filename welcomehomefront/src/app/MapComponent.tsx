@@ -81,10 +81,13 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
               latitude: 43.6532,
               zoom: 11,
                 pitch: 45,
+
             }}
             style={{ width: "100%", height: "100%" }}
             mapStyle="mapbox://styles/ezhayne/cm7rh4jlv002u01snbyjzdaev"
-        // Tell Mapbox which layer(s) should be interactive:
+            maxZoom={20}
+            minZoom={10.9}
+
         interactiveLayerIds={["toronto-fill-layer"]}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
