@@ -1,14 +1,16 @@
 "use client";
 import * as React from "react";
-import Map, { Source, Layer, LayerProps } from "react-map-gl/mapbox";
+import Map, { Source, Layer } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapComponentProps {
-    areaName: string;
+  areaName: string;
 }
 
-export default function MapComponent({areaName}: MapComponentProps) {
-  const [torontoData, setTorontoData] = React.useState(null);
+export default function MapComponent({ areaName }: MapComponentProps) {
+  const [torontoData, setTorontoData] = React.useState<any>(null);
+  // Store the feature currently under the pointer
+  const [hoveredFeature, setHoveredFeature] = React.useState<any>(null);
 
   React.useEffect(() => {
     fetch("/torontoNeighbourhood-brafx6.geojson")
@@ -22,21 +24,52 @@ export default function MapComponent({areaName}: MapComponentProps) {
       .catch((err) => console.error("Failed to load GeoJSON:", err));
   }, []);
 
-  const torontoFillLayer: LayerProps = {
+
+  const torontoFillLayer = {
     id: "toronto-fill-layer",
     type: "fill",
-      filter: ['==', 'AREA_NAME', areaName],
-      slot: "bottom",
+    filter: ["==", "AREA_NAME", areaName],
+    slot: "bottom",
     paint: {
       "fill-color": "#bf195a",
       "fill-opacity": 0.6,
       "fill-outline-color": "#000000",
-        "fill-emissive-strength": 1,
+      "fill-emissive-strength": 1,
+    },
+  };
+
+  const torontoHoverLayer = {
+    id: "toronto-hover-layer",
+    type: "fill",
+    filter: ["==", "AREA_NAME", ""],
+    slot: "bottom",
+    paint: {
+      "fill-color": "#bf195a",
+      "fill-opacity": 1,
+      "fill-outline-color": "#000000",
+      "fill-emissive-strength": 1,
     },
   };
 
 
-    return (
+  const handleMouseMove = (event: any) => {
+    const feature = event.features && event.features[0];
+    if (feature) {
+      setHoveredFeature(feature);
+    } else {
+      setHoveredFeature(null);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredFeature(null);
+  };
+
+  const hoverFilter = hoveredFeature
+    ? ["==", "AREA_NAME", hoveredFeature.properties.AREA_NAME]
+    : ["==", "AREA_NAME", ""];
+
+  return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Map
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
@@ -47,11 +80,16 @@ export default function MapComponent({areaName}: MapComponentProps) {
         }}
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h"
+        // Tell Mapbox which layer(s) should be interactive:
+        interactiveLayerIds={["toronto-fill-layer"]}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Only render the Source/Layer after the data has loaded */}
         {torontoData && (
           <Source id="toronto-data" type="geojson" data={torontoData}>
             <Layer {...torontoFillLayer} />
+
+            <Layer {...torontoHoverLayer} filter={hoverFilter} />
           </Source>
         )}
       </Map>
