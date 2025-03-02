@@ -87,7 +87,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     type: "fill",
     slot: "bottom",
     paint: {
-      "fill-color": "#5e9fd4",
+      "fill-color": "#c6aa23",
       "fill-opacity": 0.6,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
@@ -113,7 +113,7 @@ const LandmarkHoverLayer: LayerProps = {
     filter: ["==", "AREA_NAME", ""],
     slot: "bottom",
     paint: {
-      "fill-color": "#5e9fd4",
+      "fill-color": "#c6aa23",
       "fill-opacity": 1,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
@@ -173,7 +173,7 @@ const LandmarkHoverLayer: LayerProps = {
                         mapStyle={theme.theme === 'dark' ? 'mapbox://styles/ezhayne/cm7rosvj3002m01sv4y1mdjzp' : 'mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h'}
           maxZoom={20}
           minZoom={10.9}
-          interactiveLayerIds={["toronto-fill-layer", "Landmark-fill-Layer"]}
+          interactiveLayerIds={["toronto-fill-layer", "Landmark-fill-layer"]}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
                         onLoad={onMapLoad}
