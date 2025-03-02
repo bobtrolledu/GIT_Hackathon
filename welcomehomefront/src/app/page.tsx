@@ -167,7 +167,7 @@ export default function Home() {
 							<div className="w-2/9 top-25 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm fixed left-0 top-0 overflow-y-auto z-5">
 								<Tabs defaultValue="tab-1">
 									<ScrollArea className="">
-										<TabsList className="mb-3 gap-1 bg-transparent">
+										<TabsList className="mb-2 ml-1 mr-1 gap-1 bg-transparent">
 											<TabsTrigger
 												value="tab-1"
 												className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
@@ -204,7 +204,7 @@ export default function Home() {
 									</TabsContent>
 									<TabsContent value="tab-2">
 										{highlightedArea1 === "" ? (
-											<SpotlightCard className="custom-spotlight-card m-5 z-30 h-200" spotlightColor="rgba(255, 255, 255, 0.2)">
+											<SpotlightCard className="custom-spotlight-card m-5 z-30" spotlightColor="rgba(255, 255, 255, 0.2)">
 												<span className="font-bold text-white">OOPS! No data yet.</span>
 												<p className="text-white">
 													Tell us more about yourself to get started!
