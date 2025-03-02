@@ -33,7 +33,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     filter: ["in", "AREA_NAME", areaName1, areaName2, areaName3],
     slot: "bottom",
     paint: {
-      "fill-color": "#bf195a",
+      "fill-color": "#5e9fd4",
       "fill-opacity": 0.6,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
@@ -46,7 +46,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     filter: ["==", "AREA_NAME", ""],
     slot: "bottom",
     paint: {
-      "fill-color": "#bf195a",
+      "fill-color": "#5e9fd4",
       "fill-opacity": 1,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
