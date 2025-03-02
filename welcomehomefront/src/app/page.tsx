@@ -102,25 +102,25 @@ export default function Home() {
             {/* Sidebar */}
             <div className="w-2/9 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30 ">
                 <Tabs defaultValue="tab-1">
-                  <ScrollArea>
-                    <TabsList className="before:bg-border relative mb-3 h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px">
+                  <ScrollArea className="ml-5">
+                    <TabsList className="mb-3 gap-1 bg-transparent">
                       <TabsTrigger
                         value="tab-1"
-                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
                       >
                         <Link className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                        Links
+                        Link
                       </TabsTrigger>
                       <TabsTrigger
                         value="tab-2"
-                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
                       >
                         <MapPin className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
                         Locations
                       </TabsTrigger>
                       <TabsTrigger
                         value="tab-3"
-                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
                       >
                         <Mountain className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
                         Landmarks
