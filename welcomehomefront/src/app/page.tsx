@@ -6,7 +6,7 @@ import { ArrowRightIcon, SearchIcon, Loader2 } from "lucide-react";
 import MapComponent from "@/app/MapComponent";
 
 export default function Home() {
-    function getCookie(name) {
+    function getCookie(name: string) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             var cookies = document.cookie.split(';');
@@ -44,8 +44,7 @@ export default function Home() {
                 method: "POST",
                 headers: {
                   'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': csrftoken
+                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ query: searchQuery })
             });
