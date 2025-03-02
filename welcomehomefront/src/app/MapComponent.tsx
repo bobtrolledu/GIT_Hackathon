@@ -3,7 +3,7 @@ import * as React from 'react';
 import Map from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export default function MapComponent() {
+export default function MapComponent(areaName: string | null) {
     return (
         <div >
             <Map mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN} initialViewState={{
