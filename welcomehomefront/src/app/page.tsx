@@ -6,20 +6,6 @@ import { ArrowRightIcon, SearchIcon, Loader2 } from "lucide-react";
 import MapComponent from "@/app/MapComponent";
 
 export default function Home() {
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
 
     const [searchQuery, setSearchQuery] = useState("");
     const [coordinates, setCoordinates] = useState<{ lat: string, lon: string } | null>(null);
@@ -30,13 +16,7 @@ export default function Home() {
         if (searchQuery.trim() === "") return;
 
         console.log("Searching for:", searchQuery);
-        var csrftoken = getCookie('csrftoken');
-        console.log("CSRF Token:", csrftoken);
         setLoading(true); // Show "Searching..." for exactly 3 seconds
-
-        setTimeout(() => {
-            setLoading(false); // Remove "Searching..." after 3 seconds
-        }, 500);
 
         try {
             const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
@@ -44,8 +24,7 @@ export default function Home() {
                 method: "POST",
                 headers: {
                   'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': csrftoken
+                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ query: searchQuery })
             });
@@ -56,6 +35,7 @@ export default function Home() {
 
             const data = await response.json(); // Assign return value to a variable
             console.log("Search results:", data);
+            setLoading(false);
             setHighlightedArea(data);
         } catch (error) {
             console.error("Error fetching search results:", error);
