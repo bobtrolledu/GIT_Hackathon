@@ -6,7 +6,7 @@ import { ArrowRightIcon, User, Loader2, ChevronRight, ChevronLeft, MapPin, Link,
 import MapComponent from "@/app/MapComponent";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
+import SpotlightCard from "@/app/LocationCard";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +14,6 @@ export default function Home() {
     const [highlightedArea1, setHighlightedArea1] = useState("");
     const [highlightedArea2, setHighlightedArea2] = useState("");
     const [highlightedArea3, setHighlightedArea3] = useState("");
-    const { toast } = useToast();
 
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
@@ -91,7 +90,7 @@ export default function Home() {
     return (
         <div className="flex dark">
             {loading && (
-                <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+                <div className="text-foreground text-sm fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
                     <div className="bg-muted p-6 rounded-lg shadow-lg flex items-center space-x-3">
                         <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
@@ -99,11 +98,10 @@ export default function Home() {
                 </div>
             )}
 
-            <img src="/WelcomeHomeLogo.png" className="absolute top-2 left-20 z-100 w-auto h-20"/>
+            <img src="/WelcomeHomeLogo.png" className="absolute top-4 left-20 z-100 w-auto h-18"/>
 
             {/* Sidebar */}
-            <div className="w-2/9 h-screen bg-white p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30">
-
+            <div className="w-2/9 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30 ">
                 <Tabs defaultValue="tab-1">
                   <ScrollArea>
                     <TabsList className="before:bg-border relative mb-3 h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px">
@@ -132,7 +130,7 @@ export default function Home() {
                     <ScrollBar orientation="horizontal" />
                   </ScrollArea>
                     <TabsContent value="tab-1">
-                        <p className="text-gray-700 text-center mb-4">Helpful resources for newcomers to Canada.</p>
+                        <p className="text-center mb-4">Helpful resources for newcomers to Canada.</p>
                         <ul className="space-y-2">
                             <li><a
                                 href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
@@ -166,10 +164,18 @@ export default function Home() {
                         </ul>
                     </TabsContent>
                     <TabsContent value="tab-2">
-
+                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                          <span className="font-bold">{highlightedArea1}</span>
+                        </SpotlightCard>
+                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                          <span className="font-bold">{highlightedArea2}</span>
+                        </SpotlightCard>
+                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                          <span className="font-bold">{highlightedArea3}</span>
+                        </SpotlightCard>
                     </TabsContent>
                     <TabsContent value="tab-3">
-                        <p className="text-gray-700 text-center mb-4">Explore famous landmarks in Toronto.</p>
+                        <p className="text-center mb-4">Explore famous landmarks in Toronto.</p>
                         <ul className="space-y-2">
                             <li>📍 <strong>CN Tower:</strong> One of the tallest towers in the world, offering stunning
                                 views.
@@ -202,18 +208,16 @@ export default function Home() {
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
                 <MapComponent areaName1={highlightedArea1} areaName2={highlightedArea2} areaName3={highlightedArea3}/>
             </div>
+
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
-                <div className="absolute top-0 right-0 w-screen h-25 bg-white pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
-
-
+                <div className="absolute top-0 right-0 w-screen h-25 bg-background pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
                         alt="Canadian Flag"
                         className="w-16 h-auto mr-10 ml-10"
                     />
-
                     <div className="relative w-3/7 mr-80">
-                        <Input className="peer ps-9 pe-9" placeholder="Tell us about yourself and we'll help you find the perfect place to call home." type="search" value={searchQuery}
+                        <Input className="text-foreground peer ps-9 pe-9" placeholder="Tell us about yourself and we'll help you find the perfect place to call home." type="search" value={searchQuery}
                                onChange={(e) => setSearchQuery(e.target.value)}
                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}/>
                         <div

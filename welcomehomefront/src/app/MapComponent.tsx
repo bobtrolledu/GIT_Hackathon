@@ -73,7 +73,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
 
   return (
     <div className="w-screen h-screen">
-        <div className="absolute w-4/5 h-screen right-0">
+        <div className="absolute w-screen h-screen right-0">
           <Map
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
             initialViewState={{
@@ -83,7 +83,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
                 pitch: 45,
             }}
             style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/ezhayne/cm7rdoz8g002401sv64xnehz8"
+            mapStyle="mapbox://styles/ezhayne/cm7rh4jlv002u01snbyjzdaev"
         // Tell Mapbox which layer(s) should be interactive:
         interactiveLayerIds={["toronto-fill-layer"]}
         onMouseMove={handleMouseMove}
