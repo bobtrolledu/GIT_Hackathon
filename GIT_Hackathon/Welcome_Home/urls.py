@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('api/', views.visibleMinorityView, name='visibleMinorityView'),
+    path('api/compute_neighbourhood', views.computeNeighbourhood, name='computer_neighbourhood')
 ]

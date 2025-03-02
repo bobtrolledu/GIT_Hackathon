@@ -1,7 +1,8 @@
 from openai import OpenAI
 from .models import *
+import os
+from dotenv import load_dotenv
 
-client = OpenAI()
 
 # Function to format queryset data into a readable string
 def format_table_data(queryset):
@@ -12,6 +13,10 @@ def format_table_data(queryset):
     return "\n".join(table_data) if table_data else "No data found"
 
 def compute_neighbourhoods(user_prompt):
+    load_dotenv()
+    client = OpenAI(
+        api_key=os.environ.get("OPEN_API_KEY"),
+    )
     print(user_prompt)
     # Fetch all records from the database
     dataLanguage = nativeLanguage.objects.all().values()
@@ -26,7 +31,7 @@ def compute_neighbourhoods(user_prompt):
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant that does not show any work and only provides results."},
+            {"role": "system", "content": "You are a helpful assistant that does not show any work and only provides results and a neighbourhood name by itself"},
             {"role": "user", "content": f"""
     Here are some tables of information about the population in Toronto:
     
@@ -39,11 +44,11 @@ def compute_neighbourhoods(user_prompt):
     🌎 Visible Minority Groups:
     {table_string_minority}
     
-    Based on this data, what are the top 3 neighborhoods that fit the following user: {user_prompt}?
+    Based on this data, only return the name of the top neighborhood that fits the following user: {user_prompt}?
     """},
         ],
     )
 
     # Print the response
-    //print(completion.choices[0].message.content)
+    print(completion.choices[0].message.content)
     return completion.choices[0].message.content
