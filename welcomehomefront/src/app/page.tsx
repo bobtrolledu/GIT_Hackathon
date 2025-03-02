@@ -90,7 +90,7 @@ export default function Home() {
                 </div>
             )}
 
-            <img src="/WelcomeHomeLogo.png" className="absolute top-4 left-20 z-100 w-auto h-18"/>
+            <img src="/WelcomeHomeLogo.png" className="absolute top-4 left-36 z-100 w-auto h-18"/>
 
             {/* Sidebar */}
             <div className="w-2/9 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30 ">
@@ -157,13 +157,23 @@ export default function Home() {
                     </TabsContent>
                     <TabsContent value="tab-2">
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                          <span className="font-bold">{highlightedArea1}</span>
+                            <span className="font-bold">{highlightedArea1}Test</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                            </p>
                         </SpotlightCard>
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                          <span className="font-bold">{highlightedArea2}</span>
+                            <span className="font-bold">{highlightedArea2}Test</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                            </p>
                         </SpotlightCard>
+
                         <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                          <span className="font-bold">{highlightedArea3}</span>
+                            <span className="font-bold">{highlightedArea3}Test</span>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit augue nec purus lobortis, quis vestibulum sapien fringilla. Vestibulum molestie non tortor in sollicitudin. Fusce dapibus metus velit, id dignissim erat facilisis sed. Aenean suscipit enim nec enim dapibus molestie.
+                            </p>
                         </SpotlightCard>
                     </TabsContent>
                     <TabsContent value="tab-3">
