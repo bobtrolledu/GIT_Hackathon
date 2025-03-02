@@ -164,9 +164,9 @@ export default function Home() {
 							{/* Logo */}
 
 							{/* Sidebar */}
-							<div className="w-2/9 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30 ">
+							<div className="w-2/9 top-25 h-screen bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm fixed left-0 top-0 overflow-y-auto z-5">
 								<Tabs defaultValue="tab-1">
-									<ScrollArea className="ml-5">
+									<ScrollArea className="">
 										<TabsList className="mb-3 gap-1 bg-transparent">
 											<TabsTrigger
 												value="tab-1"
@@ -193,7 +193,7 @@ export default function Home() {
 										<ScrollBar orientation="horizontal" />
 									</ScrollArea>
 									<TabsContent value="tab-1">
-										<p className="text-center mb-4">Helpful resources for newcomers to Canada.</p>
+										<p className="text-center">Helpful resources for newcomers to Canada.</p>
 										<AnimatedList
 											items={linksList}
 											showGradients={false}
