@@ -9,9 +9,8 @@ interface MapComponentProps {
   areaName3: string;
 }
 
-
-
 export default function MapComponent({ areaName1, areaName2, areaName3 }: MapComponentProps) {
+  const [LandmarkData, setLandmarkData] = React.useState<any>(null);
   const [torontoData, setTorontoData] = React.useState<any>(null);
   // Store the feature currently under the pointer
   const [hoveredFeature, setHoveredFeature] = React.useState<any>(null);
@@ -28,6 +27,18 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
         return res.json();
       })
       .then((data) => setTorontoData(data))
+      .catch((err) => console.error("Failed to load GeoJSON:", err));
+  }, []);
+
+  React.useEffect(() => {
+    fetch("/Landmarks.geojson")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Fetch error: ${res.status} ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then((data) => setLandmarkData(data))
       .catch((err) => console.error("Failed to load GeoJSON:", err));
   }, []);
 
@@ -63,6 +74,18 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     fetchNeighbourhoodImg();
   }, [hoveredFeature, imageCache]);
 
+  const LandmarkFillLayer: LayerProps = {
+    id: "Landmark-fill-layer",
+    type: "fill",
+    slot: "bottom",
+    paint: {
+      "fill-color": "#5e9fd4",
+      "fill-opacity": 0.6,
+      "fill-outline-color": "#000000",
+      "fill-emissive-strength": 1,
+    },
+  };
+
   const torontoFillLayer: LayerProps = {
     id: "toronto-fill-layer",
     type: "fill",
@@ -76,31 +99,10 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     },
   };
 
-function getTorontoPoint(coordinates: [number, number], name: string) {
-  return {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: coordinates,
-        },
-        properties: {
-          name: name,
-        },
-      },
-    ],
-  };
-}
-
-const cnTowerpoint = getTorontoPoint([-79.3871, 43.6426], "CN Tower");
-
-function getTorontoPlace(name: string,point: string) {
-  return {
-    id: name,
-    type: "circle",
-    source: point,
+const LandmarkHoverLayer: LayerProps = {
+    id: "Landmark-hover-layer",
+    type: "fill",
+    filter: ["==", "AREA_NAME", ""],
     slot: "bottom",
     paint: {
       "fill-color": "#5e9fd4",
@@ -109,9 +111,6 @@ function getTorontoPlace(name: string,point: string) {
       "fill-emissive-strength": 1,
     },
   };
-}
-
-const cnTowerLayer  = getTorontoPlace("CN-Tower", "cn_source");
 
   const torontoHoverLayer: LayerProps = {
     id: "toronto-hover-layer",
@@ -161,7 +160,7 @@ const cnTowerLayer  = getTorontoPlace("CN-Tower", "cn_source");
                         mapStyle="mapbox://styles/ezhayne/cm7rosvj3002m01sv4y1mdjzp"
           maxZoom={20}
           minZoom={10.9}
-          interactiveLayerIds={["toronto-fill-layer"]}
+          interactiveLayerIds={["toronto-fill-layer", "Landmark-fill-Layer"]}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
@@ -171,8 +170,9 @@ const cnTowerLayer  = getTorontoPlace("CN-Tower", "cn_source");
                 <Layer {...torontoFillLayer} />
                 <Layer {...torontoHoverLayer} filter={hoverFilter} />
               </Source>
-              <Source id="cn-tower-source" type="geojson" data={cnTowerpoint}>
-                <Layer {...cnTowerLayer} filter={hoverFilter} />
+              <Source id="Landmark-data" type="geojson" data={LandmarkData}>
+                <Layer {...LandmarkFillLayer} />
+                <Layer {...LandmarkHoverLayer} filter={hoverFilter} />
               </Source>
             </>
           )}
