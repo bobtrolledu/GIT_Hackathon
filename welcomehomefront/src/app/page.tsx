@@ -6,7 +6,7 @@ import { ArrowRightIcon, User, Loader2, ChevronRight, ChevronLeft, MapPin, Link,
 import MapComponent from "@/app/MapComponent";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +14,7 @@ export default function Home() {
     const [highlightedArea1, setHighlightedArea1] = useState("");
     const [highlightedArea2, setHighlightedArea2] = useState("");
     const [highlightedArea3, setHighlightedArea3] = useState("");
-    const [sidebarPage, setSidebarPage] = useState(1); // Toggle between pages (1: Links, 2: Locations)
+    const { toast } = useToast();
 
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
@@ -60,10 +60,10 @@ export default function Home() {
     };
 
     return (
-        <div className="flex">
+        <div className="flex dark">
             {loading && (
-                <div className="fixed inset-0 flex items-center justify-center  bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
+                <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+                    <div className="bg-muted p-6 rounded-lg shadow-lg flex items-center space-x-3">
                         <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
                     </div>
@@ -171,14 +171,11 @@ export default function Home() {
 
             {/* Background Map */}
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
-                <MapComponent areaName1={highlightedArea1} areaName2={highlightedArea2} areaName3={highlightedArea3} />
+                <MapComponent areaName1={highlightedArea1} areaName2={highlightedArea2} areaName3={highlightedArea3}/>
             </div>
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
-                <div
-                    className="absolute top-0 right-0 w-screen h-25 bg-white pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
-                    {/*
-                    <h1 className="font-sans text-2xl text-center mb-3">Hello and Welcome Home!</h1>
-                    */}
+                <div className="absolute top-0 right-0 w-screen h-25 bg-white pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
+
 
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
