@@ -153,7 +153,7 @@ const UnClickableAnimatedList: React.FC<AnimatedListProps> = ({
             index={index}
           >
             <div
-              className={`p-4 bg-background rounded-lg} ${itemClassName}`}
+              className={`p-4 bg-background rounded-lg ${itemClassName}`}
             >
               <p className="text-white m-0">{item}</p>
             </div>
