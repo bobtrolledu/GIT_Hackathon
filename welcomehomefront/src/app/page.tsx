@@ -149,8 +149,6 @@ export default function Home() {
                 </div>
             )}
 
-            <img src="/WelcomeHomeLogo.png" className="absolute top-4 left-36 z-100 w-auto h-18"/>
-
             {/* Sidebar */}
             <div className="w-2/9 h-screen top-25 bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 ">
                 <Tabs defaultValue="tab-1">
@@ -240,13 +238,10 @@ export default function Home() {
             </div>
             {/* Search Bar */}
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
-                <div className="absolute top-0 right-0 w-screen h-25 bg-background pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
-                        alt="Canadian Flag"
-                        className="w-16 h-auto mr-10 ml-10"
-                    />
-                    <div className="relative w-3/7 mr-80">
+                <div className="absolute top-0 right-0 w-screen h-25 bg-background pointer-events-auto flex flex-row items-center z-40 shadow-lg justify-between">
+                    <img src="/WelcomeHomeLogo.png" className="w-auto h-15 mr-10 ml-10"/>
+
+                    <div className="relative w-3/7 m-5 flex items-center">
                         <Input className="text-foreground peer ps-9 pe-9" placeholder="Tell us about yourself and we'll help you find the perfect place to call home." type="search" value={searchQuery}
                                onChange={(e) => setSearchQuery(e.target.value)}
                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}/>
@@ -265,7 +260,11 @@ export default function Home() {
                         </button>
                     </div>
 
-
+					<img
+                        src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
+                        alt="Canadian Flag"
+                        className="w-16 h-auto mr-10 ml-10"
+                    />
                     {/*
                     <div className="mt-5 p-4 bg-gray-100 rounded-lg">
                         <h2 className="text-lg font-semibold text-center mb-2">🛬 New to Canada?</h2>
