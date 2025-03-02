@@ -132,3 +132,7 @@ a {
   color: inherit;
   text-decoration: underline;
 }
+
+.mapboxgl-popup-tip {
+  opacity: 0;
+}
