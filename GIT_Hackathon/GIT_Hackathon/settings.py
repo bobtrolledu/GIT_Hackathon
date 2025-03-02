@@ -29,8 +29,7 @@ SECRET_KEY = 'django-insecure-i0l06tjoj%9399(bq(0*_n_zqip+fwfok$#g9v@1_+qh#l%7+s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -41,6 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Welcome_Home',
+    'corsheaders',
+    'rest_framework'
+]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True # <-------- this
+CORS_ALLOW_CREDENTIALS = True  # Allow credentials
+CORS_ALLOW_ALL_HEADERS = True
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000/"] # (Api Base Url) <-------- this (allow csrf_token) for doing whitelist
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "OPTIONS",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'GIT_Hackathon.urls'
@@ -79,9 +97,9 @@ WSGI_APPLICATION = 'GIT_Hackathon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE'),
+        'ENGINE': "django.db.backends.postgresql",
         'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
+        'USER': "postgres",
         'PASSWORD': os.getenv('PASSWORD'),
         'HOST': os.getenv('HOST'),
         'PORT': os.getenv('PORT')

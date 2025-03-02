@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ArrowRightIcon, SearchIcon, Loader2, ChevronRight, ChevronLeft } from "lucide-react"; // Added arrows
 import MapComponent from "@/app/MapComponent";
-import NewSearchButton from "@/app/NewSearchButton";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -16,8 +15,8 @@ export default function Home() {
     const handleSearch = async () => {
         if (searchQuery.trim() === "") return;
 
-        console.log("Searching for:", searchQuery);
-        setLoading(true); // Show "Searching..." for exactly 3 seconds
+        console.log("Searching for what you need! Please hold :) :", searchQuery);
+       setLoading(true); // Show "Searching..." for exactly 3 seconds
 
         try {
             const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
@@ -50,9 +49,9 @@ export default function Home() {
     return (
         <div className="flex">
             {loading && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 bg-white/20 shadow-lg ring-1 ring-black/5 fade-in-20">
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
-                        <Loader2 className="animate-spin h-6 w-6 text-blue-600"/>
+                        <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
                     </div>
                 </div>
@@ -166,9 +165,11 @@ export default function Home() {
                         <button
                             className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
                             aria-label="Submit search"
-                            type="submit"
+                            type="button"
+                            onClick={handleSearch}
+                            disabled={loading} // Disable button while loading
                         >
-                            <ArrowRightIcon size={16} aria-hidden="true"/>
+                            {loading ? <Loader2 className="animate-spin h-5 w-5" /> : <ArrowRightIcon size={16} />}
                         </button>
                     </div>
 
@@ -184,3 +185,4 @@ export default function Home() {
         </div>
     );
 }
+
