@@ -90,8 +90,7 @@ export default function MapComponent({ areaName }: MapComponentProps) {
             {torontoData && (
               <Source id="toronto-data" type="geojson" data={torontoData}>
                 <Layer {...torontoFillLayer} />
-
-            <Layer {...torontoHoverLayer} filter={hoverFilter} />
+                <Layer {...torontoHoverLayer} filter={hoverFilter} />
               </Source>
             )}
           </Map>
