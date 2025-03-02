@@ -4,10 +4,12 @@ import Map, { Source, Layer, LayerProps } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapComponentProps {
-    areaName: string;
+    areaName1: string;
+    areaName2: string;
+    areaName3: string;
 }
 
-export default function MapComponent({ areaName }: MapComponentProps) {
+export default function MapComponent({ areaName1, areaName2, areaName3 }: MapComponentProps) {
   const [torontoData, setTorontoData] = React.useState<any>(null);
   // Store the feature currently under the pointer
   const [hoveredFeature, setHoveredFeature] = React.useState<any>(null);
@@ -28,7 +30,7 @@ export default function MapComponent({ areaName }: MapComponentProps) {
   const torontoFillLayer: LayerProps = {
     id: "toronto-fill-layer",
     type: "fill",
-    filter: ["==", "AREA_NAME", areaName],
+    filter: ["in", "AREA_NAME", areaName1, areaName2, areaName3],
     slot: "bottom",
     paint: {
       "fill-color": "#bf195a",
@@ -91,7 +93,7 @@ export default function MapComponent({ areaName }: MapComponentProps) {
               <Source id="toronto-data" type="geojson" data={torontoData}>
                 <Layer {...torontoFillLayer} />
 
-            <Layer {...torontoHoverLayer} filter={hoverFilter} />
+                <Layer {...torontoHoverLayer} filter={hoverFilter} />
               </Source>
             )}
           </Map>
