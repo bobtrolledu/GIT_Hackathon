@@ -14,7 +14,6 @@ httpx==0.28.1
 idna==3.10
 jiter==0.8.2
 openai==1.65.2
-psycopg2==2.9.10
 pydantic==2.10.6
 pydantic_core==2.27.2
 python-dotenv==1.0.1
