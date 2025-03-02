@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/computeNeighbourhood/', views.computeNeighbourhood),
     path('api/computeDescription/', views.computeDescription),
+    path('api/getNeighbourhoodImg/', views.getNeighbourhoodImg),
 ]
