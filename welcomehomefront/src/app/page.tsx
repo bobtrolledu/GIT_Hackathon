@@ -139,8 +139,8 @@ export default function Home() {
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
                 <MapComponent areaName={highlightedArea}/>
             </div>
-            <div className="flex items-center justify-center absolute z-40 w-screen h-screen pointer-events-none fade-out-20">
-                <div className="mt-2 w-96 bg-white h-auto p-5 rounded-lg drop-shadow-2xl pointer-events-auto flex flex-col items-center">
+            <div className="absolute z-40 w-screen h-screen pointer-events-none">
+                <div className="absolute bottom-10 right-10 mt-2 w-96 bg-white h-auto p-5 rounded-lg drop-shadow-2xl pointer-events-auto flex flex-col items-center">
                     {/* Welcome Message */}
                     <h1 className="font-sans text-2xl text-center mb-3">Hello and Welcome Home!</h1>
                     {/* Canadian Flag Image */}
