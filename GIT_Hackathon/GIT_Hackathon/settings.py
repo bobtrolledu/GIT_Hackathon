@@ -97,9 +97,9 @@ WSGI_APPLICATION = 'GIT_Hackathon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE'),
+        'ENGINE': "django.db.backends.postgresql",
         'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
+        'USER': "postgres",
         'PASSWORD': os.getenv('PASSWORD'),
         'HOST': os.getenv('HOST'),
         'PORT': os.getenv('PORT')
