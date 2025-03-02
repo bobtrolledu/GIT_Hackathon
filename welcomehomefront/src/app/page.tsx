@@ -130,6 +130,12 @@ export default function Home() {
                             <li>🎭 <strong>Distillery District:</strong> Historic area filled with art galleries, cafes,
                                 and theaters.
                             </li>
+                            <li>🎡 <strong>Canada's Wonderland:</strong> A thrilling amusement park featuring roller coasters,
+                                water rides, and entertainment.
+                            </li>
+                            <li>🎨 <strong>Art Gallery of Ontario:</strong> A world-class gallery showcasing Canadian and
+                                international art.
+                            </li>
                         </ul>
                     </>
                 )}
