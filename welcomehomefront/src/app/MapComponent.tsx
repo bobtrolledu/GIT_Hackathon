@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import Map, { Source, Layer } from "react-map-gl/mapbox";
+import Map, { Source, Layer, LayerProps } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapComponentProps {
@@ -25,7 +25,7 @@ export default function MapComponent({ areaName }: MapComponentProps) {
   }, []);
 
 
-  const torontoFillLayer = {
+  const torontoFillLayer: LayerProps = {
     id: "toronto-fill-layer",
     type: "fill",
     filter: ["==", "AREA_NAME", areaName],
@@ -38,7 +38,7 @@ export default function MapComponent({ areaName }: MapComponentProps) {
     },
   };
 
-  const torontoHoverLayer = {
+  const torontoHoverLayer: LayerProps = {
     id: "toronto-hover-layer",
     type: "fill",
     filter: ["==", "AREA_NAME", ""],
