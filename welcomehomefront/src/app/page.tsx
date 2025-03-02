@@ -2,13 +2,18 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { ArrowRightIcon, User, Loader2, ChevronRight, ChevronLeft } from "lucide-react"; // Added arrows
+import { ArrowRightIcon, User, Loader2, ChevronRight, ChevronLeft, MapPin, Link, Mountain  } from "lucide-react"; // Added arrows
 import MapComponent from "@/app/MapComponent";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(false); // Controls the "Searching..." message
-    const [highlightedArea, setHighlightedArea] = useState("");
+    const [highlightedArea1, setHighlightedArea1] = useState("");
+    const [highlightedArea2, setHighlightedArea2] = useState("");
+    const [highlightedArea3, setHighlightedArea3] = useState("");
     const [sidebarPage, setSidebarPage] = useState(1); // Toggle between pages (1: Links, 2: Locations)
 
     const handleSearch = async () => {
@@ -18,7 +23,7 @@ export default function Home() {
        setLoading(true); // Show "Searching..." for exactly 3 seconds
 
         try {
-            const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+            const response1 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
                 credentials: 'include',
                 method: "POST",
                 headers: {
@@ -28,13 +33,51 @@ export default function Home() {
                 body: JSON.stringify({ query: searchQuery })
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            if (!response1.ok) {
+                throw new Error(`HTTP error! Status: ${response1.status}`);
             }
 
-            const data = await response.json(); // Assign return value to a variable
-            console.log("Search results:", data);
-            setHighlightedArea(data);
+            const data1 = await response1.json(); // Assign return value to a variable
+
+            const response2 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+                credentials: 'include',
+                method: "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: searchQuery })
+            });
+
+            if (!response2.ok) {
+                throw new Error(`HTTP error! Status: ${response2.status}`);
+            }
+
+            const data2 = await response2.json();
+
+            const response3 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+                credentials: 'include',
+                method: "POST",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: searchQuery })
+            });
+
+            if (!response3.ok) {
+                throw new Error(`HTTP error! Status: ${response3.status}`);
+            }
+
+            const data3 = await response3.json();
+
+            console.log("Search results:", data1);
+            console.log("Search results:", data2);
+            console.log("Search results:", data3);
+
+            setHighlightedArea1(data1);
+            setHighlightedArea2(data2);
+            setHighlightedArea3(data3);
 
             setLoading(false);
 
@@ -48,7 +91,7 @@ export default function Home() {
     return (
         <div className="flex">
             {loading && (
-                <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 z-50">
+                <div className="fixed inset-0 flex items-center justify-center  bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
                         <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
@@ -56,33 +99,40 @@ export default function Home() {
                 </div>
             )}
 
-            <div className="absolute top-5 left-5 z-100 text-5xl font-bold font-script">
-                welcome home
-            </div>
+            <img src="/WelcomeHomeLogo.png" className="absolute top-2 left-20 z-100 w-auto h-20"/>
 
             {/* Sidebar */}
-            <div className="w-1/5 h-screen bg-white p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30">
-                <div className="flex justify-between items-center mb-5">
-                    <h2 className="text-xl font-semibold text-center">🌍 {sidebarPage === 1 ? "Immigration Resources" : "Toronto Locations"}</h2>
-                    <div className="flex space-x-2">
-                        {sidebarPage > 1 && (
-                            <button onClick={() => setSidebarPage(1)}
-                                    className="p-2 bg-gray-200 rounded hover:bg-gray-300">
-                                <ChevronLeft size={20}/>
-                            </button>
-                        )}
-                        {sidebarPage < 2 && (
-                            <button onClick={() => setSidebarPage(2)}
-                                    className="p-2 bg-gray-200 rounded hover:bg-gray-300">
-                                <ChevronRight size={20}/>
-                            </button>
-                        )}
-                    </div>
-                </div>
+            <div className="w-2/9 h-screen bg-white p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30">
 
-                {sidebarPage === 1 ? (
-                    <>
-                        <p className="text-gray-700 text-center mb-4">Helpful resources for newcomers in Canada.</p>
+                <Tabs defaultValue="tab-1">
+                  <ScrollArea>
+                    <TabsList className="before:bg-border relative mb-3 h-auto w-full gap-0.5 bg-transparent p-0 before:absolute before:inset-x-0 before:bottom-0 before:h-px">
+                      <TabsTrigger
+                        value="tab-1"
+                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                      >
+                        <Link className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+                        Links
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="tab-2"
+                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                      >
+                        <MapPin className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+                        Locations
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="tab-3"
+                        className="bg-muted overflow-hidden rounded-b-none border-x border-t py-2 data-[state=active]:z-10 data-[state=active]:shadow-none"
+                      >
+                        <Mountain className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+                        Landmarks
+                      </TabsTrigger>
+                    </TabsList>
+                    <ScrollBar orientation="horizontal" />
+                  </ScrollArea>
+                    <TabsContent value="tab-1">
+                        <p className="text-gray-700 text-center mb-4">Helpful resources for newcomers to Canada.</p>
                         <ul className="space-y-2">
                             <li><a
                                 href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
@@ -114,10 +164,12 @@ export default function Home() {
                                    target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">🔢
                                 Apply for a Social Insurance Number (SIN)</a></li>
                         </ul>
-                    </>
-                ) : (
-                    <>
-                        <p className="text-gray-700 text-center mb-4">Explore famous locations in Toronto.</p>
+                    </TabsContent>
+                    <TabsContent value="tab-2">
+
+                    </TabsContent>
+                    <TabsContent value="tab-3">
+                        <p className="text-gray-700 text-center mb-4">Explore famous landmarks in Toronto.</p>
                         <ul className="space-y-2">
                             <li>📍 <strong>CN Tower:</strong> One of the tallest towers in the world, offering stunning
                                 views.
@@ -134,29 +186,27 @@ export default function Home() {
                             <li>🎭 <strong>Distillery District:</strong> Historic area filled with art galleries, cafes,
                                 and theaters.
                             </li>
-                            <li>🎡 <strong>Canada's Wonderland:</strong> A thrilling amusement park featuring roller coasters,
+                            <li>🎡 <strong>Canada's Wonderland:</strong> A thrilling amusement park featuring roller
+                                coasters,
                                 water rides, and entertainment.
                             </li>
                             <li>🎨 <strong>Art Gallery of Ontario:</strong> A world-class gallery showcasing Canadian and
                                 international art.
                             </li>
                         </ul>
-                    </>
-                )}
+                    </TabsContent>
+                </Tabs>
             </div>
 
             {/* Background Map */}
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
-                <MapComponent areaName={highlightedArea}/>
+                <MapComponent areaName1={highlightedArea1} areaName2={highlightedArea2} areaName3={highlightedArea3} />
             </div>
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
                 <div
                     className="absolute top-0 right-0 w-screen h-25 bg-white pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
                     {/*
-
                     <h1 className="font-sans text-2xl text-center mb-3">Hello and Welcome Home!</h1>
-
-
                     */}
 
                     <img

@@ -44,7 +44,7 @@ def compute_neighbourhoods(user_prompt):
     🌎 Visible Minority Groups:
     {table_string_minority}
     
-    Based on this data, only return the name of the top neighborhood that fits the following user: {user_prompt}?
+    Based on this data, only return the name of the top 3 neighborhoods that fits the following user with a comma between them: {user_prompt}?
     """},
         ],
     )
