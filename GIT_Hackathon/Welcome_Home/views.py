@@ -20,8 +20,6 @@ def computeNeighbourhood(request):
 
             # Simulating a response
             response_data = compute_neighbourhoods(search_query)
-            print(response_data)
-            print(JsonResponse)
             return JsonResponse(response_data, safe=False)
 
         except json.JSONDecodeError:

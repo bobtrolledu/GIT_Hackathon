@@ -33,7 +33,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     filter: ["in", "AREA_NAME", areaName1, areaName2, areaName3],
     slot: "bottom",
     paint: {
-      "fill-color": "#bf195a",
+      "fill-color": "#5e9fd4",
       "fill-opacity": 0.6,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
@@ -46,7 +46,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     filter: ["==", "AREA_NAME", ""],
     slot: "bottom",
     paint: {
-      "fill-color": "#bf195a",
+      "fill-color": "#5e9fd4",
       "fill-opacity": 1,
       "fill-outline-color": "#000000",
       "fill-emissive-strength": 1,
@@ -83,7 +83,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
                 pitch: 45,
             }}
             style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h"
+            mapStyle="mapbox://styles/ezhayne/cm7rdoz8g002401sv64xnehz8"
         // Tell Mapbox which layer(s) should be interactive:
         interactiveLayerIds={["toronto-fill-layer"]}
         onMouseMove={handleMouseMove}

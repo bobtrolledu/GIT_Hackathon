@@ -23,7 +23,7 @@ export default function Home() {
        setLoading(true); // Show "Searching..." for exactly 3 seconds
 
         try {
-            const response1 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
+            const response = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
                 credentials: 'include',
                 method: "POST",
                 headers: {
@@ -33,47 +33,18 @@ export default function Home() {
                 body: JSON.stringify({ query: searchQuery })
             });
 
-            if (!response1.ok) {
-                throw new Error(`HTTP error! Status: ${response1.status}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            const data1 = await response1.json(); // Assign return value to a variable
+            const data = await response.json(); // Assign return value to a variable
+            const list_data = data.split(", ")
 
-            const response2 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
-                credentials: 'include',
-                method: "POST",
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ query: searchQuery })
-            });
+            const data1 = list_data[0]
+            const data2 = list_data[1]
+            const data3 = list_data[2]
 
-            if (!response2.ok) {
-                throw new Error(`HTTP error! Status: ${response2.status}`);
-            }
-
-            const data2 = await response2.json();
-
-            const response3 = await fetch("http://localhost:8000/api/computeNeighbourhood/", {
-                credentials: 'include',
-                method: "POST",
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ query: searchQuery })
-            });
-
-            if (!response3.ok) {
-                throw new Error(`HTTP error! Status: ${response3.status}`);
-            }
-
-            const data3 = await response3.json();
-
-            console.log("Search results:", data1);
-            console.log("Search results:", data2);
-            console.log("Search results:", data3);
+            console.log("Search results:", data);
 
             setHighlightedArea1(data1);
             setHighlightedArea2(data2);
