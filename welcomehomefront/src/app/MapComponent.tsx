@@ -4,7 +4,7 @@ import Map, { Source, Layer, LayerProps } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapComponentProps {
-  areaName: string;
+    areaName: string;
 }
 
 export default function MapComponent({ areaName }: MapComponentProps) {
@@ -70,29 +70,32 @@ export default function MapComponent({ areaName }: MapComponentProps) {
     : ["==", "AREA_NAME", ""];
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <Map
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-        initialViewState={{
-          longitude: -79.3832,
-          latitude: 43.6532,
-          zoom: 11,
-        }}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h"
+    <div className="w-screen h-screen">
+        <div className="absolute w-4/5 h-screen right-0">
+          <Map
+            mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+            initialViewState={{
+              longitude: -79.3832,
+              latitude: 43.6532,
+              zoom: 11,
+                pitch: 45,
+            }}
+            style={{ width: "100%", height: "100%" }}
+            mapStyle="mapbox://styles/ezhayne/cm7pv3r9p000k01t2f36v0o4h"
         // Tell Mapbox which layer(s) should be interactive:
         interactiveLayerIds={["toronto-fill-layer"]}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-      >
-        {torontoData && (
-          <Source id="toronto-data" type="geojson" data={torontoData}>
-            <Layer {...torontoFillLayer} />
+          >
+            {torontoData && (
+              <Source id="toronto-data" type="geojson" data={torontoData}>
+                <Layer {...torontoFillLayer} />
 
             <Layer {...torontoHoverLayer} filter={hoverFilter} />
-          </Source>
-        )}
-      </Map>
+              </Source>
+            )}
+          </Map>
+        </div>
     </div>
   );
 }

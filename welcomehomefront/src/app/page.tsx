@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { ArrowRightIcon, SearchIcon, Loader2, ChevronRight, ChevronLeft } from "lucide-react"; // Added arrows
+import { ArrowRightIcon, User, Loader2, ChevronRight, ChevronLeft } from "lucide-react"; // Added arrows
 import MapComponent from "@/app/MapComponent";
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState("");
-    const [coordinates, setCoordinates] = useState<{ lat: string, lon: string } | null>(null);
     const [loading, setLoading] = useState(false); // Controls the "Searching..." message
     const [highlightedArea, setHighlightedArea] = useState("");
     const [sidebarPage, setSidebarPage] = useState(1); // Toggle between pages (1: Links, 2: Locations)
@@ -49,16 +48,21 @@ export default function Home() {
     return (
         <div className="flex">
             {loading && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
                         <Loader2 className="animate-spin h-6 w-6 text-blue-600" />
                         <p className="text-lg font-semibold">Searching...</p>
                     </div>
                 </div>
             )}
+
+            <div className="absolute top-5 left-5 z-100 text-5xl font-bold font-script">
+                welcome home
+            </div>
+
             {/* Sidebar */}
-            <aside className="w-80 h-screen bg-white p-5 shadow-md fixed left-0 top-0 overflow-y-auto z-50">
-                <div className="flex justify-between items-center">
+            <div className="w-1/5 h-screen bg-white p-5 fixed left-0 top-0 overflow-y-auto z-5 pt-30">
+                <div className="flex justify-between items-center mb-5">
                     <h2 className="text-xl font-semibold text-center">🌍 {sidebarPage === 1 ? "Immigration Resources" : "Toronto Locations"}</h2>
                     <div className="flex space-x-2">
                         {sidebarPage > 1 && (
@@ -139,34 +143,35 @@ export default function Home() {
                         </ul>
                     </>
                 )}
-            </aside>
+            </div>
 
             {/* Background Map */}
             <div className="w-screen h-screen absolute inset-x-0 inset-y-0 -z-10">
                 <MapComponent areaName={highlightedArea}/>
             </div>
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
-                <div className="absolute bottom-10 right-10 mt-2 w-96 bg-white h-auto p-5 rounded-lg drop-shadow-2xl pointer-events-auto flex flex-col items-center">
-                    {/* Welcome Message */}
+                <div
+                    className="absolute top-0 right-0 w-screen h-25 bg-white pointer-events-auto flex flex-row-reverse items-center z-40 shadow-lg">
+                    {/*
+
                     <h1 className="font-sans text-2xl text-center mb-3">Hello and Welcome Home!</h1>
-                    {/* Canadian Flag Image */}
+
+
+                    */}
+
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"
                         alt="Canadian Flag"
-                        className="w-16 h-12 mb-4"
+                        className="w-16 h-auto mr-10 ml-10"
                     />
 
-                    <p className="text-gray-600 text-center mb-4">
-                        Tell us about yourself and we'll help you find the perfect place to call home.
-                    </p>
-
-                    <div className="relative w-full">
-                        <Input className="peer ps-9 pe-9" placeholder="Search..." type="search" value={searchQuery}
+                    <div className="relative w-3/7 mr-80">
+                        <Input className="peer ps-9 pe-9" placeholder="Tell us about yourself and we'll help you find the perfect place to call home." type="search" value={searchQuery}
                                onChange={(e) => setSearchQuery(e.target.value)}
                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}/>
                         <div
                             className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
-                            <SearchIcon size={16}/>
+                            <User size={16}/>
                         </div>
                         <button
                             className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
@@ -175,17 +180,19 @@ export default function Home() {
                             onClick={handleSearch}
                             disabled={loading} // Disable button while loading
                         >
-                            {loading ? <Loader2 className="animate-spin h-5 w-5" /> : <ArrowRightIcon size={16} />}
+                            {loading ? <Loader2 className="animate-spin h-5 w-5"/> : <ArrowRightIcon size={16}/>}
                         </button>
                     </div>
 
-                    {/* Added Previous Message Below Search Bar */}
+
+                    {/*
                     <div className="mt-5 p-4 bg-gray-100 rounded-lg">
                         <h2 className="text-lg font-semibold text-center mb-2">🛬 New to Canada?</h2>
                         <p className="text-sm text-gray-700 text-center">
                             Explore essential services, housing, healthcare, and employment opportunities.
                         </p>
                     </div>
+                    */}
                 </div>
             </div>
         </div>
