@@ -190,25 +190,37 @@ export default function Home() {
                         />
                     </TabsContent>
                     <TabsContent value="tab-2">
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea1}</span>
-                            <p>
-                                {desc_1}
-                            </p>
-                        </SpotlightCard>
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea2}</span>
-                            <p>
-                                {desc_2}
-                            </p>
-                        </SpotlightCard>
+                        {highlightedArea1==="" ? (
+                            <SpotlightCard className="custom-spotlight-card m-5 z-30 h-200" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                <span className="font-bold">OOPS! No data yet.</span>
+                                <p>
+                                    Tell us more about yourself to get started!
+                                </p>
+                            </SpotlightCard>
+                        ) : (
+                            <>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea1}</span>
+                                    <p>
+                                        {desc_1}
+                                    </p>
+                                </SpotlightCard>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea2}</span>
+                                    <p>
+                                        {desc_2}
+                                    </p>
+                                </SpotlightCard>
 
-                        <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
-                            <span className="font-bold">{highlightedArea3}</span>
-                            <p>
-                                {desc_3}
-                            </p>
-                        </SpotlightCard>
+                                <SpotlightCard className="custom-spotlight-card m-5" spotlightColor="rgba(255, 255, 255, 0.2)">
+                                    <span className="font-bold">{highlightedArea3}</span>
+                                    <p>
+                                        {desc_3}
+                                    </p>
+                                </SpotlightCard>
+                            </>
+                        )}
+
                     </TabsContent>
                     <TabsContent value="tab-3">
                         <p className="text-center mb-4">Explore famous landmarks in Toronto.</p>
