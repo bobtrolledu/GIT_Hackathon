@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import Map, { Source, Layer, LayerProps } from "react-map-gl/mapbox";
+import Map, { Source, Layer, LayerProps, Popup } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapComponentProps {
@@ -13,6 +13,8 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
   const [torontoData, setTorontoData] = React.useState<any>(null);
   // Store the feature currently under the pointer
   const [hoveredFeature, setHoveredFeature] = React.useState<any>(null);
+  const [hoverCoordinates, setHoverCoordinates] = React.useState<{ lng: number; lat: number } | null>(null);
+
 
   React.useEffect(() => {
     fetch("/torontoNeighbourhood-brafx6.geojson")
@@ -58,13 +60,16 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
     const feature = event.features && event.features[0];
     if (feature) {
       setHoveredFeature(feature);
+      setHoverCoordinates(event.lngLat);
     } else {
       setHoveredFeature(null);
+      setHoverCoordinates(null);
     }
   };
 
   const handleMouseLeave = () => {
     setHoveredFeature(null);
+    setHoverCoordinates(null);
   };
 
   const hoverFilter = hoveredFeature
@@ -95,9 +100,20 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
             {torontoData && (
               <Source id="toronto-data" type="geojson" data={torontoData}>
                 <Layer {...torontoFillLayer} />
-
                 <Layer {...torontoHoverLayer} filter={hoverFilter} />
               </Source>
+            )}
+                 {hoveredFeature && hoverCoordinates && (
+             <Popup
+              longitude={hoverCoordinates.lng}
+              latitude={hoverCoordinates.lat}
+              closeButton={false}
+              closeOnClick={false}
+              anchor="bottom"
+            >
+              <div>{hoveredFeature.properties.AREA_NAME}</div>
+            </Popup>
+
             )}
           </Map>
         </div>
