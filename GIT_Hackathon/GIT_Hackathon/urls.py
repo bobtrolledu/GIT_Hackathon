@@ -3,9 +3,6 @@ from django.contrib import admin
 # add include to the path
 from django.urls import path, include
 from Welcome_Home import views
-# import views from todo
-# import routers from the REST framework
-# it is necessary for routing
 from rest_framework import routers
 
 # create a router object
@@ -18,4 +15,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/computeNeighbourhood/', views.computeNeighbourhood),
+    path('api/computeDescription/', views.computeDescription),
+    path('api/getNeighbourhoodImg/', views.getNeighbourhoodImg),
 ]

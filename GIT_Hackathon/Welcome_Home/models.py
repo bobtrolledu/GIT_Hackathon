@@ -63,3 +63,39 @@ class ageDensity(models.Model):
 
     def __str__(self):
         return self.Neighbourhood
+
+class civics_equity(models.Model):
+    Neighbourhood = models.CharField(max_length=200, unique=True)
+    NeighbourhoodId = models.IntegerField()
+    City_grant_funding = models.IntegerField()
+    Neighbourhood_equity_score = models.IntegerField()
+    Salvation_army_donors = models.IntegerField()
+    Walk_score = models.IntegerField()
+    Watermain_breaks = models.IntegerField()
+
+    def __str__(self):
+        return self.Neighbourhood
+
+class economics(models.Model):
+    Neighbourhood = models.CharField(max_length=200, unique=True)
+    NeighbourhoodId = models.IntegerField()
+    Business_licenses = models.IntegerField()
+    Businesses = models.IntegerField()
+    Local_employment = models.IntegerField()
+    Social_assistance_recipients = models.IntegerField()
+
+    def __str__(self):
+        return self.Neighbourhood
+
+class environment(models.Model):
+    Neighbourhood = models.CharField(max_length=200, unique=True)
+    NeighbourhoodId = models.IntegerField()
+    Green_rebate_programs = models.IntegerField()
+    Green_spaces = models.IntegerField()
+    pollutant_carcinogenic_score = models.IntegerField()
+    pollutant_noncarcinogenic_score = models.IntegerField()
+    pollutant_release = models.IntegerField()
+    tree_cover = models.IntegerField()
+
+    def __str__(self):
+        return self.Neighbourhood

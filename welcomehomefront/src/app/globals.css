@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
-
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -9,7 +7,6 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-borel: "Borel";
 }
 
 :root {
@@ -49,7 +46,7 @@
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  --background: oklch(0.198 0.003 17.429);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.141 0.005 285.823);
   --card-foreground: oklch(0.985 0 0);
@@ -131,3 +128,11 @@
   }
 }
 
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.mapboxgl-popup-tip {
+  opacity: 0;
+}
