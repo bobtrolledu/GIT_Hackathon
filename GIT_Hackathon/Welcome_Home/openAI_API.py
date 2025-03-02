@@ -1,6 +1,6 @@
 from openai import OpenAI
 from django.db import connection
-from .models import nativeLanguage, ageDensity, visibleMinority
+from .models import nativeLanguage, ageDensity, visibleMinority, civics_equity
 import os
 from dotenv import load_dotenv
 
@@ -33,12 +33,14 @@ def compute_neighbourhoods(user_prompt):
     dataLanguage = nativeLanguage.objects.all().values()
     dataAge = ageDensity.objects.all().values()
     dataMinority = visibleMinority.objects.all().values()
+    civics = civics_equity.objects.all().values()
 
     # Format data for display
     #table_string_census = format_table_data(census_data)
     table_string_language = format_table_data(dataLanguage)
     table_string_age = format_table_data(dataAge)
     table_string_minority = format_table_data(dataMinority)
+    table_string_civics = format_table_data(civics)
 
     # Generate response using ChatGPT
     completion = client.chat.completions.create(
@@ -48,7 +50,9 @@ def compute_neighbourhoods(user_prompt):
             {"role": "user", "content": f"""
 Here are some tables of information about the population in Toronto:
 
-
+Civics and equity data:
+{table_string_civics}
+---
 🗣 Native Language Data:
 {table_string_language}
 ---
@@ -58,7 +62,7 @@ Here are some tables of information about the population in Toronto:
 🌎 Visible Minority Groups:
 {table_string_minority}
 
-Based on this data, only return the name of the top 3 neighborhoods that fit the following user with a comma between them: {user_prompt}?
+Based on this data, only return the name of the top 3 neighborhoods within the tables that fit the following user with a comma between them: {user_prompt}?
 """}
         ],
     )

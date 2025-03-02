@@ -57,7 +57,7 @@ export default function Home() {
             });
 
             const data_description = await response_description.json();
-            const list_data_description = data_description.split("^ ")
+            const list_data_description = data_description.split("^")
 
             const description1 = list_data_description[0]
             const description2 = list_data_description[1]

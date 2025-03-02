@@ -120,7 +120,7 @@ export default function MapComponent({ areaName1, areaName2, areaName3 }: MapCom
 
                         }}
                         style={{width: "100%", height: "100%"}}
-                        mapStyle="mapbox://styles/ezhayne/cm7rh4jlv002u01snbyjzdaev"
+                        mapStyle="mapbox://styles/ezhayne/cm7rosvj3002m01sv4y1mdjzp"
                         maxZoom={20}
                         minZoom={10.9}
 
