@@ -99,7 +99,7 @@ export default function Home() {
                     )}
                 </div>
             </div>
-            <div className="w-screen h-screen bg-green-700 absolute inset-x-0 z-0">
+            <div className="w-screen h-screen bg-black absolute inset-x-0 z-0">
                 <MapComponent areaName={highlightedArea} />
             </div>
         </div>
