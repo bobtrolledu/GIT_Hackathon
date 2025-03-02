@@ -88,10 +88,10 @@ export default function Home() {
         }
     };
 
-    const items = [<a
-        href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
-        target="_blank" rel="noopener noreferrer" className=" hover:underline">🇨🇦
-        Government of Canada - New Immigrants</a>,
+    const items = [
+		<a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html"
+			target="_blank" rel="noopener noreferrer" className=" hover:underline">🇨🇦
+        	Government of Canada - New Immigrants</a>,
         <a href="https://settlement.org" target="_blank" rel="noopener noreferrer"
            className=" hover:underline w-full">🏠 Settlement.org - Housing, Jobs, and
             Services</a>,
@@ -152,34 +152,34 @@ export default function Home() {
             {/* Sidebar */}
             <div className="w-2/9 h-screen top-25 bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 ">
                 <Tabs defaultValue="tab-1">
-                  <ScrollArea className="ml-5">
-                    <TabsList className="mb-3 gap-1 bg-transparent">
-                      <TabsTrigger
-                        value="tab-1"
-                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
-                      >
-                        <Link className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                        Link
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="tab-2"
-                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
-                      >
-                        <MapPin className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                        Locations
-                      </TabsTrigger>
-                      <TabsTrigger
-                        value="tab-3"
-                        className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
-                      >
-                        <Mountain className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
-                        Landmarks
-                      </TabsTrigger>
-                    </TabsList>
-                    <ScrollBar orientation="horizontal" />
-                  </ScrollArea>
+					<ScrollArea className="m-1">
+						<TabsList className="mb-3 gap-1 bg-transparent">
+						<TabsTrigger
+							value="tab-1"
+							className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
+						>
+							<Link className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+							Link
+						</TabsTrigger>
+						<TabsTrigger
+							value="tab-2"
+							className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
+						>
+							<MapPin className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+							Locations
+						</TabsTrigger>
+						<TabsTrigger
+							value="tab-3"
+							className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full data-[state=active]:shadow-none"
+						>
+							<Mountain className="-ms-0.5 me-1.5 opacity-60" size={16} aria-hidden="true" />
+							Landmarks
+						</TabsTrigger>
+						</TabsList>
+						<ScrollBar orientation="horizontal" />
+					</ScrollArea>
                     <TabsContent value="tab-1">
-                        <p className="text-center mb-4">Helpful resources for newcomers to Canada.</p>
+                        <p className="text-center">Helpful resources for newcomers to Canada.</p>
                         <AnimatedList
                           items={items}
                           showGradients={false}
@@ -189,7 +189,7 @@ export default function Home() {
                     </TabsContent>
                     <TabsContent value="tab-2">
                         {highlightedArea1==="" ? (
-                            <SpotlightCard className="custom-spotlight-card m-5 z-30 h-200" spotlightColor="rgba(255, 255, 255, 0.2)">
+                            <SpotlightCard className="custom-spotlight-card m-5 z-30" spotlightColor="rgba(255, 255, 255, 0.2)">
                                 <span className="font-bold">OOPS! No data yet.</span>
                                 <p>
                                     Tell us more about yourself to get started!
@@ -238,7 +238,7 @@ export default function Home() {
             </div>
             {/* Search Bar */}
             <div className="absolute z-40 w-screen h-screen pointer-events-none">
-                <div className="absolute top-0 right-0 w-screen h-25 bg-background pointer-events-auto flex flex-row items-center z-40 shadow-lg justify-between">
+                <div className="absolute top-0 right-0 w-screen h-25 bg-background pointer-events-auto flex flex-row items-center z-40 shadow-lg justify-around">
                     <img src="/WelcomeHomeLogo.png" className="w-auto h-15 mr-10 ml-10"/>
 
                     <div className="relative w-3/7 m-5 flex items-center">
