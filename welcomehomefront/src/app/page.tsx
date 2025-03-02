@@ -150,7 +150,7 @@ export default function Home() {
             )}
 
             {/* Sidebar */}
-            <div className="w-2/9 h-screen top-25 bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm p-5 fixed left-0 top-0 overflow-y-auto z-5 ">
+            <div className="w-2/9 h-screen top-25 bg-sidebar/70 backdrop-filter backdrop-blur-xs border-r text-foreground text-sm fixed left-0 top-0 overflow-y-auto z-5 justify-between gap-5">
                 <Tabs defaultValue="tab-1">
 					<ScrollArea className="m-1">
 						<TabsList className="mb-3 gap-1 bg-transparent">
