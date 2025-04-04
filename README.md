@@ -1,3 +1,6 @@
+##Demo Video
+[![Video Demo](https://img.youtube.com/vi/I-XeNGsgqak/0.jpg)](https://www.youtube.com/watch?v=I-XeNGsgqak)
+
 ## Inspiration
 With an increasing amount of new immigrants and refugee displacement in the world, we identified a lack of resources for those looking to make an informed decision about a relocation. Many individuals and families face challenges in accessing reliable information on key factors such as job opportunities, cost of living, legal requirements, healthcare, and cultural integration in their prospective new homes.
 
